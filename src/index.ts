@@ -20,6 +20,8 @@ const client = new Client({
 });
 
 (async () => {
+    client.cooldowns = new Map();
+
     client.interactionHandlers = {
         chatInputCommands: new Collection(),
         buttons: new Map(),

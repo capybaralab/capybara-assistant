@@ -42,3 +42,19 @@ model GiveawayParticipants {
 
     @@map("giveaway_participant")
 }
+
+model UserSeeds {
+    userId String @id @map("user_id")
+    seed String
+
+    @@map("user_seed")
+}
+
+model Cooldowns {
+    id Int @id @default(autoincrement())
+    interactionName String @map("interaction_name")
+    userId String @map("user_id")
+    expiresAt DateTime @map("expires_at")
+
+    @@map("cooldown")
+}

@@ -1,6 +1,14 @@
 import { Locale } from 'discord.js';
 
 const TEXTS = {
+    OPEN_CASE_REPLY_NO_SEED: {
+        'en-US': "You don't have a seed. You can get one by using `/set-seed` command.",
+        pl: 'Nie masz seedu. Użyj komendy `/set-seed` aby go utworzyć.',
+    },
+    SET_SEED_SUCCESS: {
+        'en-US': 'Your seed has been updated.',
+        pl: 'Twój seed został zaktualizowany.',
+    },
     VERIFY_ACCOUNT_REPLY_SUCCESS: {
         'en-US': 'Your account has been successfully verified.',
         pl: 'Twoje konto zostało pomyślnie zweryfikowane.',

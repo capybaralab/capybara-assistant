@@ -34,11 +34,11 @@ type EnvironmentVariables = {
     DATABASE_URL: string;
 };
 
-const channels = ['logs', 'verification', 'tickets', 'ticketArchives', 'giveaways'] as const;
+const channels = ['logs', 'verification', 'tickets', 'ticketArchives', 'giveaways', 'drops'] as const;
 const roles = ['customer', 'administrator'] as const;
 const categories = ['tickets'] as const;
 const colors = ['default'] as const;
-const imageUrls = ['verificationMessage', 'getInTouchMessage', 'giveawayMessage'] as const;
+const imageUrls = ['verificationMessage', 'getInTouchMessage', 'giveawayMessage', 'openingMessage'] as const;
 
 const getEnvironmentVariables = async (keys: (keyof EnvironmentVariables)[]) => {
     const environmentVariables = {} as EnvironmentVariables;
@@ -74,6 +74,7 @@ const config: Config = {
             tickets: '1004865067071832125',
             ticketArchives: '1005190051250057317',
             giveaways: '1005499464364077236',
+            drops: '1006969601336295555',
         },
         roles: {
             customer: '1005114579694661703',
@@ -92,6 +93,7 @@ const config: Config = {
         getInTouchMessage:
             'https://images-ext-1.discordapp.net/external/vmH6ZyxWJZS13US1IDzzZif3-9HM4bjsoUZvOHMOlAU/https/i.imgur.com/33obrSn.png',
         giveawayMessage: 'https://cdn.discordapp.com/attachments/1005121223111487599/1006265732901896192/giveaway.png',
+        openingMessage: 'https://media.discordapp.net/attachments/1005121223111487599/1006970342247505971/opene.png',
     },
 };
 

@@ -80,6 +80,36 @@ const templates = new Map<Snowflake, { messageOptions: MessageOptions; translati
             translation: '👋 Cześć! Zweryfikuj proszę swoje konto klikając poniższy przycisk.',
         },
     ],
+    [
+        config.ids.channels.drops,
+        {
+            messageOptions: {
+                embeds: [
+                    new EmbedBuilder({
+                        title: 'Case opening',
+                        description:
+                            '🎁 You have a new case to open! Please click the button below to open it.\n\nIf you wish to change your seed, use `/set-seed` command.',
+                        image: { url: config.imageUrls.openingMessage },
+                        ...DEFAULT_EMBED_OPTIONS,
+                    }),
+                ],
+                components: [
+                    new ActionRowBuilder<ButtonBuilder>({
+                        components: [
+                            new ButtonBuilder({
+                                customId: 'open-case',
+                                label: 'Open case',
+                                style: ButtonStyle.Success,
+                            }),
+                            translationButton,
+                        ],
+                    }),
+                ],
+            },
+            translation:
+                '🎁 Masz nową skrzynkę do otwarcia! Kliknij poniższy przycisk, aby ją otworzyć.\n\nJeżeli chcesz zmienić swój seed, użyj polecenia `/set-seed`.',
+        },
+    ],
 ]);
 
 export default new ChatInputCommandHandler({

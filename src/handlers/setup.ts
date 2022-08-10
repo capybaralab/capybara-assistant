@@ -47,7 +47,7 @@ export const setEventListeners = async (client: Client) => {
     }
 };
 
-export const setInteractionHandlers = async ({ interactionHandlers }: Client) => {
+export const setInteractionHandlers = async ({ interactionHandlers, cooldowns }: Client) => {
     const paths = getDirectoryContentPaths(fileURLToPath(new URL('interactions', import.meta.url)));
 
     for (const path of paths) {
@@ -69,6 +69,10 @@ export const setInteractionHandlers = async ({ interactionHandlers }: Client) =>
         }
 
         if (handler instanceof ButtonHandler) {
+            if (handler.options.cooldownDuration) {
+                cooldowns.set(handler.customId, new Map());
+            }
+
             interactionHandlers.buttons.set(handler.customId, handler);
             continue;
         }

@@ -11,6 +11,7 @@ import type { LoggerEntry } from '#utils/logger.js';
 
 export interface InteractionHandlerOptions {
     readonly permissions?: InteractionHandlerPermissions;
+    readonly cooldownDuration?: number;
 }
 
 export interface InteractionHandlerPermissions {
@@ -18,7 +19,7 @@ export interface InteractionHandlerPermissions {
     readonly roleIds?: Snowflake[];
 }
 
-export abstract class InteractionHandler<InteractionType extends Interaction,> {
+export abstract class InteractionHandler<InteractionType extends Interaction> {
     public readonly options: InteractionType extends ChatInputCommandInteraction ? Omit<
         InteractionHandlerOptions,
         'permissions'
@@ -34,7 +35,7 @@ export abstract class InteractionHandler<InteractionType extends Interaction,> {
 }
 
 export class ChatInputCommandHandler extends InteractionHandler<ChatInputCommandInteraction> {
-    public readonly builder: SlashCommandBuilder;
+    public readonly builder: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
 
     public constructor({ builder, options, execute }: ChatInputCommandHandler) {
         super({ options, execute });

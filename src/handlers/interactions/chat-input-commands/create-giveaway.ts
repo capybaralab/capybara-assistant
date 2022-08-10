@@ -30,7 +30,7 @@ dayjs.extend(dayjsUtc);
 
 dayjs.tz.setDefault('Europe/Warsaw');
 
-export default new ChatInputCommandHandler(<ChatInputCommandHandler>{
+export default new ChatInputCommandHandler({
     builder: new SlashCommandBuilder()
         .setName('create-giveaway')
         .setDescription('Creates a giveaway with the given parameters.')

@@ -1,8 +1,9 @@
-import { AutocompleteInteraction, channelMention, type Interaction, userMention } from 'discord.js';
+import { AutocompleteInteraction, channelMention, type Interaction, Locale, userMention, inlineCode } from 'discord.js';
 import EventHandler from '#structures/event-handler.js';
 import { InteractionHandler } from '#structures/interaction-handlers.js';
 import { getInteractionReplyEmbed } from '#utils/embeds.js';
 import { createLoggerEntry } from '#utils/logger.js';
+import { createCooldownInDatabase } from '#src/prisma/queries.js';
 
 const invokeInteractionHandler = async <InteractionType extends Interaction>(
     execute: InteractionHandler<InteractionType>['execute'],
@@ -122,6 +123,50 @@ const validateInteraction = async <InteractionType extends Exclude<Interaction, 
 
             return false;
         }
+    }
+
+    if (handlerOptions.cooldownDuration) {
+        const interactionCooldownMap = interaction.client.cooldowns.get(interactionName)!;
+        const activeCooldown = interactionCooldownMap.get(user.id);
+
+        if (activeCooldown) {
+            const remainingCooldown = activeCooldown.getTime() - Date.now();
+            const remainingCooldownInSeconds = (remainingCooldown / 1000).toFixed().toString();
+
+            await interaction.reply({
+                embeds: [
+                    getInteractionReplyEmbed({
+                        theme: 'warning',
+                        description:
+                            interaction.locale === Locale.Polish ? `Możesz skorzystać z tego polecenia za ${inlineCode(
+                                remainingCooldownInSeconds,
+                            )} sekund.` : `
+                        You can use this command again in ${inlineCode(remainingCooldownInSeconds)} seconds.`,
+                    }),
+                ],
+                ephemeral: true,
+            });
+
+            setTimeout(() => {
+                interactionCooldownMap.delete(user.id);
+            }, remainingCooldown);
+
+            return false;
+        }
+
+        const newCooldown = new Date(Date.now() + handlerOptions.cooldownDuration);
+
+        interactionCooldownMap.set(user.id, newCooldown);
+
+        await createCooldownInDatabase({
+            interactionName,
+            userId: user.id,
+            expiresAt: newCooldown,
+        });
+
+        setTimeout(() => {
+            interactionCooldownMap.delete(user.id);
+        }, handlerOptions.cooldownDuration);
     }
 
     return true;

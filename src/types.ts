@@ -12,6 +12,8 @@ declare module 'discord.js' {
             Snowflake,
             Omit<Giveaways, 'messageId' | 'prize' | 'isActive'> & { participants: Omit<GiveawayParticipants, 'id' | 'giveawayId'>[] }
         >;
+        cooldowns: Map<Snowflake, Map<Snowflake, Date>>;
+        userSeeds: Map<Snowflake, string>;
         interactionHandlers: {
             chatInputCommands: Collection<Snowflake, ChatInputCommandHandler>;
             buttons: Map<Snowflake, ButtonHandler>;
