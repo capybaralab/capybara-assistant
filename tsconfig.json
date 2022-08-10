@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "moduleResolution": "nodenext",
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "paths": {
+      "#src/*": ["src/*"],
+      "#handlers/*": ["src/handlers/*"],
+      "#structures/*": ["src/structures/*"],
+      "#utils/*": ["src/utils/*"],
+    }
+  },
+}

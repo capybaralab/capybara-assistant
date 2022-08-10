@@ -1,0 +1,39 @@
+{
+  "name": "djs-starter-template",
+  "version": "1.0.0",
+  "description": "Just a simple discord.js starter template written with typescript.",
+  "main": "dist/example.js",
+  "author": "Jaku-BB",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && tsc-alias && node --require dotenv/config dist/index.js",
+    "watch": "concurrently \"tsc --watch\" \"tsc-alias --watch\" \"nodemon --require dotenv/config dist/index.js | pnpm run prettify-logs\"",
+    "register-application-commands": "tsc-alias && node --require dotenv/config dist/register-application-commands.js",
+    "format": "rome format . --indent-style space --indent-size 4 --quote-style single --line-width 140 --write",
+    "prettify-logs": "pino-pretty --translateTime \"SYS:yyyy-mm-dd HH:MM:ss\" --customLevels notification:10,warning:20,error:30 --customColors notification:blue,warning:yellow,error:red"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@discordjs/rest": "^1.0.1",
+    "@prisma/client": "^4.1.1",
+    "dayjs": "^1.11.4",
+    "discord-api-types": "^0.36.3",
+    "discord.js": "^14.1.2",
+    "node-schedule": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node-schedule": "^2.1.0",
+    "concurrently": "^7.3.0",
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.19",
+    "pino": "^8.4.0",
+    "pino-pretty": "^8.1.0",
+    "prisma": "^4.1.1",
+    "rome": "0.8.0-next",
+    "tsc-alias": "^1.7.0",
+    "typescript": "^4.7.4"
+  }
+}

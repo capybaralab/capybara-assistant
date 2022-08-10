@@ -1,0 +1,44 @@
+datasource db {
+    provider = "postgres"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model MessageTranslations {
+    messageId String @id @map("message_id")
+    translation String
+
+    @@map("message_translations")
+}
+
+model Tickets {
+    channelId String @id @map("channel_id")
+    userId String @map("user_id")
+    isOpen Boolean @default(true) @map("is_open")
+
+    @@map("ticket")
+}
+
+model Giveaways {
+    messageId String @id @map("message_id")
+    prize String
+    winnersAmount Int @map("winners_amount")
+    participants GiveawayParticipants[]
+    endsAt DateTime @map("ends_at")
+    isActive Boolean @default(true) @map("is_active")
+
+    @@map("giveaway")
+}
+
+model GiveawayParticipants {
+    id Int @id @default(autoincrement())
+    giveawayId String @map("giveaway_id")
+    giveaway Giveaways @relation(fields: [giveawayId], references: [messageId])
+    userId String @map("user_id")
+    minecraftUsername String? @map("minecraft_username")
+
+    @@map("giveaway_participant")
+}
