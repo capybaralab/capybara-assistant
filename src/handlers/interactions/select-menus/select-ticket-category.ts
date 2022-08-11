@@ -81,19 +81,13 @@ export default new SelectMenuHandler({
         const ticketDescription = ticketCreatorSubmission.fields.getTextInputValue('ticket-creator-description');
         const ticketBudget = ticketCreatorSubmission.fields.getTextInputValue('ticket-creator-budget');
 
-        // if (ticketDescription.length > 200 || ticketBudget.length > 200) {
-        //     await interaction.followUp({
-        //         content: 'Chuj ci w dupę nygusie',
-        //         ephemeral: true,
-        //     })
-        //
-        //     return false;
-        // }
-
         const ticketChannel = await guild.channels.create({
             name: member.displayName,
             parent: config.ids.categories.tickets,
-            permissionOverwrites: [{ id: member.id, allow: PermissionFlagsBits.ViewChannel }],
+            permissionOverwrites: [
+                { id: member.id, allow: PermissionFlagsBits.ViewChannel },
+                { id: guild.id, deny: PermissionFlagsBits.ViewChannel },
+            ],
         });
 
         await ticketChannel.send({
