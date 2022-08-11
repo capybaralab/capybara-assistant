@@ -10,7 +10,8 @@
     "watch": "concurrently \"tsc --watch\" \"tsc-alias --watch\" \"nodemon --require dotenv/config dist/index.js | pnpm run prettify-logs\"",
     "register-application-commands": "tsc-alias && node --require dotenv/config dist/register-application-commands.js",
     "format": "rome format . --indent-style space --indent-size 4 --quote-style single --line-width 140 --write",
-    "prettify-logs": "pino-pretty --translateTime \"SYS:yyyy-mm-dd HH:MM:ss\" --customLevels notification:10,warning:20,error:30 --customColors notification:blue,warning:yellow,error:red"
+    "prettify-logs": "pino-pretty --translateTime \"SYS:yyyy-mm-dd HH:MM:ss\" --customLevels notification:10,warning:20,error:30 --customColors notification:blue,warning:yellow,error:red",
+    "db-push": "prisma db push"
   },
   "engines": {
     "node": ">=16.9.0"
