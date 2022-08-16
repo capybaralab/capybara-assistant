@@ -4,9 +4,7 @@ import EventHandler from '#structures/event-handler.js';
 import {
     getActiveGiveawaysFromDatabase,
     getMessageTranslationsFromDatabase,
-    getUserSeedsFromDatabase,
     getOpenTicketsFromDatabase,
-    getActiveCooldownsFromDatabase,
 } from '#src/prisma/queries.js';
 import displayGiveawayResults from '#src/features/giveaway.js';
 import config from '#src/config.js';
@@ -42,18 +40,6 @@ export default new EventHandler<'ready'>({
                 scheduleJob(giveawayData.endsAt, async () => {
                     await displayGiveawayResults(client, messageId);
                 });
-            }
-        }
-
-        const userSeeds = await getUserSeedsFromDatabase();
-        client.userSeeds = userSeeds && userSeeds.length > 0 ? new Map(userSeeds.map(({ userId, seed }) => [userId, seed])) : new Map();
-
-        const activeCooldowns = await getActiveCooldownsFromDatabase();
-
-        if (activeCooldowns && activeCooldowns.length > 0) {
-            for (const { interactionName, userId, expiresAt } of activeCooldowns) {
-                const interactionCooldownMap = client.cooldowns.get(interactionName)!;
-                interactionCooldownMap.set(userId, expiresAt);
             }
         }
     },

@@ -11,7 +11,6 @@ import type { LoggerEntry } from '#utils/logger.js';
 
 export interface InteractionHandlerOptions {
     readonly permissions?: InteractionHandlerPermissions;
-    readonly cooldownDuration?: number;
 }
 
 export interface InteractionHandlerPermissions {

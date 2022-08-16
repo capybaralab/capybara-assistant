@@ -69,10 +69,6 @@ export const setInteractionHandlers = async ({ interactionHandlers, cooldowns }:
         }
 
         if (handler instanceof ButtonHandler) {
-            if (handler.options.cooldownDuration) {
-                cooldowns.set(handler.customId, new Map());
-            }
-
             interactionHandlers.buttons.set(handler.customId, handler);
             continue;
         }
