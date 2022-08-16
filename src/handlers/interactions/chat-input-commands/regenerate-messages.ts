@@ -1,11 +1,11 @@
 import {
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle,
+    ButtonStyle, codeBlock,
     EmbedBuilder,
     GuildTextBasedChannel,
     Locale,
-    MessageOptions,
+    MessageOptions, roleMention,
     SelectMenuBuilder,
     SelectMenuOptionBuilder,
     SlashCommandBuilder,
@@ -110,6 +110,19 @@ const templates = new Map<Snowflake, { messageOptions: MessageOptions; translati
                 '🎁 Masz nową skrzynkę do otwarcia! Kliknij poniższy przycisk, aby ją otworzyć.\n\nJeżeli chcesz zmienić swój seed, użyj polecenia `/set-seed`.',
         },
     ],
+    [
+        config.ids.channels.rules,
+        {
+            messageOptions: {
+                embeds: [
+                    new EmbedBuilder({
+                        title: 'Rules',
+                        description: `By participating in chat, you're expected to follow the rules below.\n\nPlease feel free to report anybody to ${roleMention(config.ids.roles.administrator)} or the ${roleMention(config.ids.roles.helper)} who you think is breaking them and we'll respond swiftly and sternly.\n\n${codeBlock('1) Be friendly and patient. Do not spam the server for help.\n\n2) Be welcoming. We strive to be a community that welcomes and supports people of all backgrounds and identities.\n\n3) Be respectful. You can disagree, but this cannot be allowed to turn into a personal attack.\n\n4) Be careful about your wording. No leaking of personal information, no harassment, no accusations. Reports should be made in private, to staff, not in public channels.\n\n5) Be courteous of people\'s time and space.\n\n6) Do not impersonate developers, moderators or other users.\n\n7) These rules may vary at any time. We reserve the right to warn and ban users discretionally.\n\n8) Please follow the Discord ToS and Community Guidelines.')}`,
+                    ...DEFAULT_EMBED_OPTIONS,})
+                ]
+            }
+        }
+    ]
 ]);
 
 export default new ChatInputCommandHandler({

@@ -87,18 +87,14 @@ export default new SelectMenuHandler({
             permissionOverwrites: [
                 { id: member.id, allow: PermissionFlagsBits.ViewChannel },
                 { id: guild.id, deny: PermissionFlagsBits.ViewChannel },
-            ],
+            ]
         });
 
         await ticketChannel.send({
             embeds: [
                 new EmbedBuilder({
                     title: getTextByLocale(locale, 'TICKET_TITLE'),
-                    description: `${(getTextByLocale(locale, 'TICKET_DESCRIPTION'))}
-                    \n${bold(getTextByLocale(locale, 'TICKET_FIELD_DESCRIPTION'))}\n${ticketDescription}\n
-                    ${bold(getTextByLocale(locale, 'TICKET_FIELD_BUDGET'))}\n${
-                        ticketBudget === '' ? getTextByLocale(locale, 'TICKET_FIELD_BUDGET_UNKNOWN') : ticketBudget
-                    }\n\n${bold(getTextByLocale(locale, 'TICKET_FIELD_CATEGORY'))}\n${interaction.values[0]}`,
+                    description: `${(getTextByLocale(locale, 'TICKET_DESCRIPTION'))}\n${bold(getTextByLocale(locale, 'TICKET_FIELD_DESCRIPTION'))}\n${ticketDescription}\n${bold(getTextByLocale(locale, 'TICKET_FIELD_BUDGET'))}\n${ticketBudget === '' ? getTextByLocale(locale, 'TICKET_FIELD_BUDGET_UNKNOWN') : ticketBudget}\n\n${bold(getTextByLocale(locale, 'TICKET_FIELD_CATEGORY'))}\n${interaction.values[0]}`,
                     ...DEFAULT_EMBED_OPTIONS,
                 }),
             ],

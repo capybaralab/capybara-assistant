@@ -34,8 +34,8 @@ type EnvironmentVariables = {
     DATABASE_URL: string;
 };
 
-const channels = ['logs', 'verification', 'tickets', 'ticketArchives', 'giveaways', 'drops'] as const;
-const roles = ['customer', 'administrator'] as const;
+const channels = ['logs', 'verification', 'tickets', 'ticketArchives', 'giveaways', 'drops', 'rules'] as const;
+const roles = ['customer', 'administrator', 'helper'] as const;
 const categories = ['tickets'] as const;
 const colors = ['default'] as const;
 const imageUrls = ['verificationMessage', 'getInTouchMessage', 'giveawayMessage', 'openingMessage'] as const;
@@ -75,10 +75,12 @@ const config: Config = {
             ticketArchives: '1005190051250057317',
             giveaways: '1005499464364077236',
             drops: '1006969601336295555',
+            rules: '1004863900149362771',
         },
         roles: {
             customer: '1005114579694661703',
             administrator: '1004856417263570944',
+            helper: '1006702442060189716',
         },
         categories: {
             tickets: '1005149505760546856',
