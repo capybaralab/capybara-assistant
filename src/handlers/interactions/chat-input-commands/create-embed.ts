@@ -21,7 +21,7 @@ export default new ChatInputCommandHandler({
             embeds: [
                 new EmbedBuilder({
                     title,
-                    description: description ?? undefined,
+                    description: description?.replaceAll('^', '\n') ?? undefined,
                     color: color ? resolveColor(color as ColorResolvable) : resolveColor(config.colors.default),
                     footer: {
                         text: 'capybaralab.com',
