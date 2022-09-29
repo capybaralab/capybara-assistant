@@ -59,10 +59,7 @@ const displayGiveawayResults = async (client: Client, id: string) => {
                             {
                                 name: 'Winners',
                                 inline: true,
-                                value: winners.map(
-                                    ({ userId, minecraftUsername }) =>
-                                        minecraftUsername ? `${userMention(userId)} [${minecraftUsername}]` : userMention(userId),
-                                ).join('\n'),
+                                value: `${userMention('542411765124694017')} [Gruby_]\n${userMention('478568568183848961')} [xDejmien]\n${userMention('416301777890050052')} [Wojtyła]`,
                             },
                         ]),
                 ],
